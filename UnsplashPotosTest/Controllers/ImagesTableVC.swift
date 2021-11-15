@@ -10,6 +10,8 @@ import UIKit
 
 class ImagesTableVC: UIViewController {
     
+    var unsplash: [UnsplashPhoto] = []
+    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,17 +20,18 @@ class ImagesTableVC: UIViewController {
     
     let idImageTableVC = "idImageTableVC"
     
+    let string = "https://api.unsplash.com/photos/random/?client_id=urNpwSDpkcLREWkYaef7rb6EergbfzF2d9IXdUZQAIs"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavigationBar()
+        setConstraints()
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ImageTableViewCell.self, forCellReuseIdentifier: idImageTableVC)
-
-        setConstraints()
     }
+    
     private func setupNavigationBar() {
         let titleLabel = UILabel()
         titleLabel.text = "FAVORITES"

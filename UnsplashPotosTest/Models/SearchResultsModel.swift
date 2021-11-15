@@ -17,7 +17,7 @@ struct UnsplashPhoto: Decodable {
     let height: Int?
     let urls: [URLKing.RawValue : String]
     let created_at: String?
-//    let user: AboutUser
+    let user: AboutUser
     
     enum URLKing: String {
         case raw
@@ -28,7 +28,6 @@ struct UnsplashPhoto: Decodable {
     }
 }
 
-//struct AboutUser: Decodable {
-//    let name: String
-//    let likes: Int
-//}
+struct AboutUser: Decodable {
+    let name: String
+}

@@ -29,7 +29,7 @@ class NetworkSevice {
         var paramrters = [String: String]()
         paramrters["query"] = searchTerm
         paramrters["page"] = String(1)
-        paramrters["per_page"] = String(30)
+        paramrters["per_page"] = String(50)
         return paramrters
     }
     
@@ -50,5 +50,4 @@ class NetworkSevice {
             }
         }
     }
-    
 }

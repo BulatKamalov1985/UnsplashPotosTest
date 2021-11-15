@@ -19,10 +19,9 @@ class NetworkDataFetcher {
             }
             let decode = self.decodeJSON(type: SearchResultsModel.self, from: data)
             completion(decode)
-
         }
-        
     }
+    
     func decodeJSON<T: Decodable>(type: T.Type, from: Data?) -> T? {
         let decoder = JSONDecoder()
         guard let data = from else { return nil }
@@ -36,5 +35,4 @@ class NetworkDataFetcher {
             return nil
         }
     }
-    
 }

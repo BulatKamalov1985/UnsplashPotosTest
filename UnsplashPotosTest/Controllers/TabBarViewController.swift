@@ -17,13 +17,19 @@ class TabBarViewController: UITabBarController {
     
     func setupTabBar() {
         
-        let imagesCollectionVC = createNavController(vc: ImagesCollectionVC(), itemName: "Images", itemImage: "photo")
-        let imagesTableVC = createNavController(vc: ImagesTableVC(), itemName: "Favorites", itemImage: "heart.rectangle")
+        let imagesCollectionVC = createNavController(vc: ImagesCollectionVC(),
+                                                     itemName: "Images",
+                                                     itemImage: "photo")
+        
+        let imagesTableVC = createNavController(vc: ImagesTableVC(),
+                                                itemName: "Favorites",
+                                                itemImage: "heart.rectangle")
         
         viewControllers = [imagesCollectionVC, imagesTableVC]
     }
-    
-    func createNavController(vc: UIViewController, itemName: String, itemImage: String) -> UINavigationController {
+    func createNavController(vc: UIViewController,
+                             itemName: String,
+                             itemImage: String) -> UINavigationController {
         
         let item = UITabBarItem(title: itemName,
                                 image: UIImage(named: itemImage)?.withAlignmentRectInsets(.init(top: 10, left: 0, bottom: 0, right: 0)),
