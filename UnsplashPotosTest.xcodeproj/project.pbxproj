@@ -20,9 +20,7 @@
 		393B9AEB2740D6CE000F519F /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393B9AEA2740D6CE000F519F /* ImageCollectionViewCell.swift */; };
 		393B9AED27410F7C000F519F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393B9AEC27410F7C000F519F /* NetworkService.swift */; };
 		393B9AF0274121F2000F519F /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393B9AEF274121F2000F519F /* NetworkDataFetcher.swift */; };
-		393B9AF227412283000F519F /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393B9AF127412283000F519F /* SearchResultsModel.swift */; };
-		393B9AF427423A72000F519F /* RandomUnsplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393B9AF327423A71000F519F /* RandomUnsplashModel.swift */; };
-		393B9AF62742417C000F519F /* NetworkRandomDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393B9AF52742417C000F519F /* NetworkRandomDataFetcher.swift */; };
+		393B9AF227412283000F519F /* ResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393B9AF127412283000F519F /* ResultsModel.swift */; };
 		8E0DD27C02EF689981BE0EA1 /* Pods_UnsplashPotosTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75E15905DC46DEB8C5B7D40 /* Pods_UnsplashPotosTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,9 +40,7 @@
 		393B9AEA2740D6CE000F519F /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		393B9AEC27410F7C000F519F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		393B9AEF274121F2000F519F /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
-		393B9AF127412283000F519F /* SearchResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsModel.swift; sourceTree = "<group>"; };
-		393B9AF327423A71000F519F /* RandomUnsplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomUnsplashModel.swift; sourceTree = "<group>"; };
-		393B9AF52742417C000F519F /* NetworkRandomDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRandomDataFetcher.swift; sourceTree = "<group>"; };
+		393B9AF127412283000F519F /* ResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsModel.swift; sourceTree = "<group>"; };
 		9ED694A9B08ABE3889698ADC /* Pods-UnsplashPotosTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnsplashPotosTest.debug.xcconfig"; path = "Target Support Files/Pods-UnsplashPotosTest/Pods-UnsplashPotosTest.debug.xcconfig"; sourceTree = "<group>"; };
 		DE76A4BE3309DB59342B478F /* Pods-UnsplashPotosTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnsplashPotosTest.release.xcconfig"; path = "Target Support Files/Pods-UnsplashPotosTest/Pods-UnsplashPotosTest.release.xcconfig"; sourceTree = "<group>"; };
 		E75E15905DC46DEB8C5B7D40 /* Pods_UnsplashPotosTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnsplashPotosTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,8 +130,7 @@
 		393B9AE6273EA6EB000F519F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				393B9AF127412283000F519F /* SearchResultsModel.swift */,
-				393B9AF327423A71000F519F /* RandomUnsplashModel.swift */,
+				393B9AF127412283000F519F /* ResultsModel.swift */,
 				393B9AE7273EA6F8000F519F /* Cell */,
 			);
 			path = Models;
@@ -155,7 +150,6 @@
 			children = (
 				393B9AEC27410F7C000F519F /* NetworkService.swift */,
 				393B9AEF274121F2000F519F /* NetworkDataFetcher.swift */,
-				393B9AF52742417C000F519F /* NetworkRandomDataFetcher.swift */,
 			);
 			path = NetworkManagers;
 			sourceTree = "<group>";
@@ -291,11 +285,9 @@
 				393B9ABF273E8C72000F519F /* TabBarViewController.swift in Sources */,
 				393B9AC5273E8C72000F519F /* UnsplashPotosTest.xcdatamodeld in Sources */,
 				393B9AEB2740D6CE000F519F /* ImageCollectionViewCell.swift in Sources */,
-				393B9AF62742417C000F519F /* NetworkRandomDataFetcher.swift in Sources */,
 				393B9AE5273E9AE6000F519F /* ImagesTableVC.swift in Sources */,
-				393B9AF427423A72000F519F /* RandomUnsplashModel.swift in Sources */,
 				393B9ABB273E8C72000F519F /* AppDelegate.swift in Sources */,
-				393B9AF227412283000F519F /* SearchResultsModel.swift in Sources */,
+				393B9AF227412283000F519F /* ResultsModel.swift in Sources */,
 				393B9ABD273E8C72000F519F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

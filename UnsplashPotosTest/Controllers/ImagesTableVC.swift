@@ -20,8 +20,6 @@ class ImagesTableVC: UIViewController {
     
     let idImageTableVC = "idImageTableVC"
     
-    let string = "https://api.unsplash.com/photos/random/?client_id=urNpwSDpkcLREWkYaef7rb6EergbfzF2d9IXdUZQAIs"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()

@@ -11,13 +11,24 @@ class NetworkDataFetcher {
     
     var networkService = NetworkSevice()
     
-    func fetchImages(searchTerm: String, completion: @escaping(SearchResultsModel?) ->()) {
+    func fetchImages(searchTerm: String, completion: @escaping (ResultsModel?) ->()) {
         networkService.request(searchTerm: searchTerm) { data, error in
             if let error = error {
                 print("Error resived requesting data: \(error.localizedDescription)")
                 completion(nil)
             }
-            let decode = self.decodeJSON(type: SearchResultsModel.self, from: data)
+            let decode = self.decodeJSON(type: ResultsModel.self, from: data)
+            completion(decode)
+        }
+    }
+    
+    func fetchRandomImages(count: String, completion: @escaping ([UnsplashPhoto]?) ->()) {
+        networkService.request(count: count) { data, error in
+            if let error = error {
+                print("Error resived requesting data: \(error.localizedDescription)")
+                completion(nil)
+            }
+            let decode = self.decodeJSON(type: [UnsplashPhoto].self, from: data)
             completion(decode)
         }
     }

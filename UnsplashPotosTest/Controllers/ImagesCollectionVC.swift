@@ -16,6 +16,7 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     private var timer: Timer?
     
     private var photos = [UnsplashPhoto]()
+    private var randomPhotos = [UnsplashPhoto]()
     
     private lazy var addBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .add,
@@ -30,6 +31,9 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
         
         setupNavigationBar()
         setupSearchBar()
@@ -49,7 +53,16 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.delegate = self
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
+    }
+     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        networkDataFetcher.fetchRandomImages(count: "15") { [weak  self] result in
+            guard let results = result else { return }
+            self?.photos = results
+            self?.collectionView?.reloadData()
+        }
     }
     //    MARK: NavigationItems action
     
@@ -82,20 +95,39 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     //    MARK: UICollectionViewDataSource, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if photos.isEmpty {
+            return randomPhotos.count
+        }
         return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifierCV, for: indexPath) as! ImageCollectionViewCell
-        let unsplashPhoto = photos[indexPath.item]
-        cell.unsplashPhoto = unsplashPhoto
-        
+        if photos.isEmpty {
+            let unsplashPhoto = randomPhotos[indexPath.item]
+            cell.unsplashPhoto = unsplashPhoto
+        } else {
+            let unsplashPhoto = photos[indexPath.item]
+            cell.unsplashPhoto = unsplashPhoto
+        }
         return cell
+        
+    }
+    // Переход с CollectionVC на DetailVC
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("Was tapped")
+        let unsplashPhoto = photos.isEmpty
+        ? randomPhotos[indexPath.item+1]
+        : photos [indexPath.item+1]
+        
+        let dvc = DetailVC(unsplashPhoto: unsplashPhoto)
+        dvc.modalPresentationStyle = .formSheet
+        dvc.modalTransitionStyle = .crossDissolve
+        present(dvc, animated: true)
     }
 }
 
 //    MARK: UISearchBarDelegate
-
 extension ImagesCollectionVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)

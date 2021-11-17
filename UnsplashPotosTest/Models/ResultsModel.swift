@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SearchResultsModel: Decodable {
+struct ResultsModel: Decodable {
     let total: Int?
     let results: [UnsplashPhoto]
 }
