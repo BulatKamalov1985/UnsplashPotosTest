@@ -10,9 +10,11 @@ import UIKit
 
 class ImagesTableVC: UIViewController {
     
-    var unsplash: [UnsplashPhoto] = []
+    var networkDataFetcher = NetworkDataFetcher()
     
-    let tableView: UITableView = {
+    private var randomPhotos = [UnsplashPhoto]()
+    
+    var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -22,12 +24,26 @@ class ImagesTableVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupNavigationBar()
         setConstraints()
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ImageTableViewCell.self, forCellReuseIdentifier: idImageTableVC)
+        tableView.tableFooterView = UIView()
+        tableView.rowHeight = 105
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard randomPhotos.isEmpty else { return }
+        networkDataFetcher.fetchRandomImages(count: "15") { [weak  self] result in
+            guard let results = result else { return }
+            self?.randomPhotos = results
+            self?.tableView.reloadData()
+        }
     }
     
     private func setupNavigationBar() {
@@ -42,17 +58,25 @@ class ImagesTableVC: UIViewController {
 // MARK: UiTableViewDelegate, UiTableViewDataSource
 
 extension ImagesTableVC: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return randomPhotos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idImageTableVC, for: indexPath) as! ImageTableViewCell
-        cell.textLabel?.text = "Cell"
-        
+        print("indexPath")
+        cell.imageTitleLabel.text = randomPhotos[indexPath.row].user.name
+        cell.unsplashPhoto = randomPhotos[indexPath.row]
+
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dvc = DetailVC(unsplashPhoto: randomPhotos[indexPath.row])
+        navigationController?.pushViewController(dvc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
 }
 
 extension ImagesTableVC {

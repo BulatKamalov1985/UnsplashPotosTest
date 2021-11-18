@@ -32,9 +32,6 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
-        
         setupNavigationBar()
         setupSearchBar()
         
@@ -58,9 +55,10 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        networkDataFetcher.fetchRandomImages(count: "15") { [weak  self] result in
+        guard randomPhotos.isEmpty else { return }
+        networkDataFetcher.fetchRandomImages(count: "30") { [weak  self] result in
             guard let results = result else { return }
-            self?.photos = results
+            self?.randomPhotos = results
             self?.collectionView?.reloadData()
         }
     }
@@ -113,17 +111,15 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         return cell
         
     }
+    
     // Переход с CollectionVC на DetailVC
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("Was tapped")
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let unsplashPhoto = photos.isEmpty
-        ? randomPhotos[indexPath.item+1]
-        : photos [indexPath.item+1]
+        ? randomPhotos[indexPath.item]
+        : photos [indexPath.item]
         
         let dvc = DetailVC(unsplashPhoto: unsplashPhoto)
-        dvc.modalPresentationStyle = .formSheet
-        dvc.modalTransitionStyle = .crossDissolve
-        present(dvc, animated: true)
+        navigationController?.pushViewController(dvc, animated: true)
     }
 }
 

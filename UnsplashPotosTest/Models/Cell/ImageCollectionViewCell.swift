@@ -23,14 +23,17 @@ class ImageCollectionViewCell: UICollectionViewCell {
     private let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }() 
     
     var unsplashPhoto: UnsplashPhoto! {
         didSet {
             let photoUrl = unsplashPhoto.urls["small"]
-            guard let imageUrl = photoUrl, let url = URL(string: imageUrl) else { return }
+            guard let imageUrl = photoUrl,
+                  let url = URL(string: imageUrl)
+            else { return }
             photoImageView.sd_setImage(with: url, completed: nil )
         }
     }
