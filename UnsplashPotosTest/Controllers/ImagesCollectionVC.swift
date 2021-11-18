@@ -18,11 +18,6 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     private var photos = [UnsplashPhoto]()
     private var randomPhotos = [UnsplashPhoto]()
     
-    private lazy var addBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .add,
-                               target: self,
-                               action: #selector(addBarButtonTapped))
-    }()
     private lazy var actionBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .action,
                                target: self,
@@ -62,12 +57,8 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             self?.collectionView?.reloadData()
         }
     }
+    
     //    MARK: NavigationItems action
-    
-    @objc private func addBarButtonTapped() {
-        print(#function)
-    }
-    
     @objc private func actionBarButtonTapped() {
         print(#function)
     }
@@ -79,7 +70,7 @@ class ImagesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         titleLabel.textColor = .systemGray
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
-        navigationItem.rightBarButtonItems = [addBarButtonItem, actionBarButtonItem]
+        navigationItem.rightBarButtonItems = [actionBarButtonItem]
     }
     
     private func setupSearchBar() {

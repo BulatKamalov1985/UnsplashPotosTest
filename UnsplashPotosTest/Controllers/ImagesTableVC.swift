@@ -39,7 +39,7 @@ class ImagesTableVC: UIViewController {
         super.viewWillAppear(animated)
         
         guard randomPhotos.isEmpty else { return }
-        networkDataFetcher.fetchRandomImages(count: "15") { [weak  self] result in
+        networkDataFetcher.fetchRandomImages(count: "30") { [weak  self] result in
             guard let results = result else { return }
             self?.randomPhotos = results
             self?.tableView.reloadData()

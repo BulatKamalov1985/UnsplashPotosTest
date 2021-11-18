@@ -30,9 +30,17 @@ class DetailVC: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private lazy var addBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .add,
+                               target: self,
+                               action: #selector(addBarButtonTapped))
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupNavigationBar()
     
         myImageView.contentMode = .scaleAspectFill
         myImageView.center = view.center
@@ -45,4 +53,21 @@ class DetailVC: UIViewController {
         
         unsplashPhotoImage = unsplashPhoto
     }
+    
+    @objc private func addBarButtonTapped() {
+        print(#function)
+        let alert = UIAlertController(title: "Save Images in Favorites", message: "Do you want to save?", preferredStyle: .actionSheet)
+        let saveAction = UIAlertAction(title: "Save", style: .default)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        present(alert, animated:  true)
+        
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItems = [addBarButtonItem]
+    }
+    
 }
+
